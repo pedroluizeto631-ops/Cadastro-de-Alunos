@@ -104,10 +104,10 @@ python main.py
 * 💾 Salvar dados em arquivo (JSON)
 * 🔐 Sistema de login
 * 🖥️ Interface gráfica (Tkinter)
-* 👨‍🎓 Colocar mais um opção de pesquisar por turmas
+* 👨‍🎓 Colocar mais uma opção de pesquisar por turmas
 
 ---
 
 ## ✍️ Autor
 
-**Luizeto**
+== PEDRO AINSWORTH RAMOS LUIZETO ==
