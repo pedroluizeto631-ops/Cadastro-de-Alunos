@@ -1,113 +1,87 @@
-# 📚 Cadastro de Alunos
+# 📚 Sistema de Cadastro de Alunos
 
-Sistema simples em Python para gerenciamento de alunos, desenvolvido com foco em prática de lógica de programação e estrutura de dados.
+Sistema desenvolvido em Python para gerenciamento de alunos, com organização por turmas e funcionalidades completas de cadastro, busca e controle de dados.
 
 ---
 
 ## 🚀 Funcionalidades
 
-O sistema possui um menu interativo no terminal com as seguintes opções:
-
-* ➕ **Adicionar aluno**
-* 📋 **Listar todos os alunos**
-* 🔍 **Buscar aluno pelo nome**
-* ❌ **Remover aluno**
-* 📊 **Mostrar média geral das notas**
-* 🚪 **Sair do sistema**
+* ➕ Adicionar alunos em turmas específicas (1141, 1142, 1143)
+* 📋 Listar alunos por turma
+* 🔍 Buscar aluno pelo nome dentro da turma
+* ❌ Remover aluno
+* 📊 Calcular média geral da escola
+* 🔄 Transferir aluno entre turmas
 
 ---
 
-## 🧠 Estrutura do Sistema
+## 🧠 Estrutura do Projeto
 
-O programa funciona em um loop contínuo (`while True`), exibindo um menu para o usuário escolher a operação desejada.
+O sistema utiliza um dicionário para organizar os alunos por turma:
 
-### 🧩 Menu principal
-
-O sistema apresenta as opções:
-
-```
-[1] ADICIONAR ALUNO
-[2] LISTAR TODOS OS ALUNOS
-[3] BUSCAR ALUNO PELO NOME
-[4] REMOVER ALUNO
-[5] MOSTRAR MÉDIA GERAL DAS NOTAS
-[6] SAIR
+```python
+turmas = {
+    '1141': [],
+    '1142': [],
+    '1143': []
+}
 ```
 
-Cada opção chama uma função específica responsável pela ação escolhida.
+Cada aluno é representado por um dicionário contendo:
+
+* Nome
+* Nota 1
+* Nota 2
+* Média
+
+Essa abordagem evita conflitos de nomes iguais e melhora a organização dos dados.
 
 ---
 
-## ⚙️ Funções do Sistema
+## 💻 Tecnologias utilizadas
 
-### ➕ adicionar_aluno(lista_alunos)
-
-Responsável por cadastrar um novo aluno no sistema.
-
----
-
-### 📋 listar_alunos(lista_alunos)
-
-Exibe todos os alunos cadastrados.
+* Python
+* Estruturas de dados (listas e dicionários)
+* Programação estruturada
 
 ---
 
-### 🔍 buscar_aluno(lista_alunos)
+## 🎯 Objetivo
 
-Permite encontrar um aluno pelo nome.
+Projeto desenvolvido com foco em aprendizado de programação, aplicando conceitos como:
 
----
-
-### ❌ remover_aluno(lista_alunos)
-
-Remove um aluno da lista.
-
----
-
-### 📊 media_geral(lista_alunos)
-
-Calcula e exibe a média geral das notas dos alunos.
+* Organização de código
+* Manipulação de dados
+* Criação de sistemas interativos no terminal
+* Resolução de problemas reais (como nomes duplicados)
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## 📈 Possíveis melhorias
 
-* Python 🐍
-* Terminal / CLI
+* 💾 Persistência de dados (JSON ou banco de dados)
+* 🆔 Implementação de ID único para alunos
+* 🖥️ Interface gráfica (GUI)
+* 🌐 Versão web do sistema
+* 📊 Relatórios por turma
 
 ---
 
 ## ▶️ Como executar
 
-1. Clone o repositório:
+1. Instale o Python
+2. Baixe o arquivo do projeto
+3. Execute no terminal:
 
-```
-git clone https://github.com/pedroluizeto631-ops/cadastro-de-alunos.git
-```
-
-2. Acesse a pasta:
-
-```
-cd cadastro-de-alunos
-```
-
-3. Execute o programa:
-
-```
-python main.py
+```bash
+python nome_do_arquivo.py
 ```
 
 ---
 
-## 💡 Melhorias futuras
-
-* 💾 Salvar dados em arquivo (JSON)
-* 🔐 Sistema de login
-* 🖥️ Interface gráfica (Tkinter)
-* 👨‍🎓 Colocar mais uma opção de pesquisar por turmas
-
----
-
-## ✍️ Autor
+## 👨‍💻 Autor
 
 == PEDRO AINSWORTH RAMOS LUIZETO ==
+
+Desenvolvido para prática e evolução em programação.
+
