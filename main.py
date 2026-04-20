@@ -1,15 +1,31 @@
 from time import sleep
 
-lista_alunos = []
+# ---------------- DADOS ---------------- #
+
+turmas = {
+    '1141': [],
+    '1142': [],
+    '1143': []
+}
 
 # ---------------- FUNÇÕES ---------------- #
 
-def adicionar_aluno(lista):
+def adicionar_aluno(turmas):
+    turma = input('Digite a turma do aluno (1141, 1142, 1143) -> ')
+    
+    if turma not in turmas:
+        print('Turma inválida!')
+        return
+
     nome = input('Digite o nome completo do aluno: ')
     print('')
-    nota1 = float(input('Digite a primeira nota do aluno no semestre -> '))
-    print('')
-    nota2 = float(input('Digite a segunda nota do aluno no semestre -> '))
+    try:
+        nota1 = float(input('Digite a primeira nota do aluno no semestre -> '))
+        print('')
+        nota2 = float(input('Digite a segunda nota do aluno no semestre -> '))
+    except ValueError:
+        print('Digite apenas números válidos para as notas!')
+        return
 
     media = (nota1 + nota2) / 2
 
@@ -20,23 +36,39 @@ def adicionar_aluno(lista):
         'media': media
     }
 
-    lista.append(aluno)
+    turmas[turma].append(aluno)
     print('Aluno cadastrado com sucesso!')
 
 
-def listar_alunos(lista):
-    if not lista:
-        print('Nenhum aluno cadastrado!')
+def listar_alunos(turmas):
+    turma = input('Digite a turma (1141, 1142, 1143) -> ')
+
+    if turma not in turmas:
+        print('Turma inválida!')
         return
-    
-    for aluno in lista:
-        print(f"Nome: {aluno['nome']} | Média: {aluno['media']:.2f}")
+
+    if not turmas[turma]:
+        print('Nenhum aluno cadastrado nessa turma!')
+        return
+
+    print(f"\n--- Turma {turma} ---")
+    for aluno in turmas[turma]:
+        print(f"{aluno['nome']} | Média: {aluno['media']:.2f}")
 
 
-def buscar_aluno(lista):
+def buscar_aluno(turmas):
+    turma = input('Digite a turma do aluno (1141, 1142, 1143) -> ')
     nome = input('Digite o nome do aluno: ')
     
-    for aluno in lista:
+    if turma not in turmas:
+        print('Turma inválida.')
+        return
+    
+    if not turmas[turma]:
+        print('Nenhum aluno nessa turma!')
+        return
+    
+    for aluno in turmas[turma]:
         if aluno["nome"].lower() == nome.lower():
             print(f"\nNome: {aluno['nome']}")
             print(f"Nota 1: {aluno['nota1']}")
@@ -47,31 +79,71 @@ def buscar_aluno(lista):
     print("Aluno não encontrado.")
 
 
-def remover_aluno(lista):
+def remover_aluno(turmas):
+    turma = input('Digite a turma do aluno (1141, 1142, 1143) -> ')
+
+    if turma not in turmas:
+        print('Turma inválida!')
+        return
+
     nome = input('Digite o nome do aluno que deseja remover: ')
 
-    for aluno in lista:
+    for aluno in turmas[turma]:
         if aluno["nome"].lower() == nome.lower():
-            lista.remove(aluno)
+            turmas[turma].remove(aluno)
             print('Aluno removido com sucesso!')
             return
         
-    print('Aluno não encontrado')
+    print('Aluno não encontrado nessa turma.')
 
 
-def media_geral(lista):
-    if not lista:
-        print('Nenhum aluno cadastrado !')
+def media_geral(turmas):
+    total_alunos = 0
+    soma = 0
+
+    for turma in turmas.values():
+        for aluno in turma:
+            soma += aluno['media']
+            total_alunos += 1
+
+    if total_alunos == 0:
+        print('Nenhum aluno cadastrado!')
         return
+
+    media = soma / total_alunos
+    print(f'Média geral da escola: {media:.2f}')
+
+
+def mudar_turma(turmas):
+    turma_origem = input('Digite a turma atual do aluno -> ')
     
-    soma = 0 
+    if turma_origem not in turmas:
+        print('Turma inválida!')
+        return
 
-    for aluno in lista:
-        soma += aluno['media']
+    nome = input('Digite o nome do aluno: ')
 
-    media = soma / len(lista)
+    for aluno in turmas[turma_origem]:
+        if aluno['nome'].lower() == nome.lower():
 
-    print(f'A média geral da escola: {media:.2f}')
+            turma_destino = input('Digite a nova turma (1141, 1142, 1143) -> ')
+
+            if turma_destino not in turmas:
+                print('Turma de destino inválida!')
+                return
+
+            if turma_origem == turma_destino:
+                print('O aluno já está nessa turma!')
+                return
+
+            turmas[turma_origem].remove(aluno)
+            turmas[turma_destino].append(aluno)
+
+            print('Aluno transferido com sucesso!')
+            return
+
+    print('Aluno não encontrado na turma informada.')
+
 
 # ---------------- SISTEMA ---------------- #
 
@@ -85,30 +157,37 @@ while True:
     print('''
 Escolha o que deseja fazer:
 [1] ADICIONAR ALUNO
-[2] LISTAR TODOS OS ALUNOS
-[3] BUSCAR ALUNO PELO NOME
+[2] LISTAR ALUNOS POR TURMA
+[3] BUSCAR ALUNO
 [4] REMOVER ALUNO
-[5] MOSTRAR MÉDIA GERAL DAS NOTAS
-[6] SAIR
+[5] MÉDIA GERAL DA ESCOLA
+[6] MUDAR TURMA DO ALUNO
+[7] SAIR
 ''')
 
     escolha = input('-> ')
-    print('='*25)
 
-    if escolha == 1:
-        adicionar_aluno(lista_alunos)
+    if escolha == '1':
+        adicionar_aluno(turmas)
 
-    elif escolha == 2:
-        listar_alunos(lista_alunos)
+    elif escolha == '2':
+        listar_alunos(turmas)
 
-    elif escolha == 3:
-        buscar_aluno(lista_alunos)
+    elif escolha == '3':
+        buscar_aluno(turmas)
 
-    elif escolha == 4:
-        remover_aluno(lista_alunos)
+    elif escolha == '4':
+        remover_aluno(turmas)
 
-    elif escolha == 5:
-        media_geral(lista_alunos)
-    
-    elif escolha == 6:
+    elif escolha == '5':
+        media_geral(turmas)
+
+    elif escolha == '6':
+        mudar_turma(turmas)
+
+    elif escolha == '7':
+        print('Saindo do sistema...')
         break
+
+    else:
+        print('Opção inválida!')
