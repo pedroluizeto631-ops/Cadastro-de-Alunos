@@ -74,7 +74,7 @@ Projeto desenvolvido com foco em aprendizado de programação, aplicando conceit
 3. Execute no terminal:
 
 ```bash
-python nome_do_arquivo.py
+main.py
 ```
 
 ---
